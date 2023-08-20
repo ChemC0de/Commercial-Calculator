@@ -1,0 +1,91 @@
+
+import React from "react";
+import SliderComponent from "./Common/SliderComponent";
+
+const SliderSelect = ({ data, setData }) => {
+    const rent_limit = 100000;
+    return (
+      <div>
+        <SliderComponent
+          onChange={(e, value) => {
+            setData({
+              ...data,
+              rentalValue: value.toFixed(0),
+              securityDeposit: (value).toFixed(0),
+              rentAmount: (value).toFixed(0),
+
+            }); 
+          }}
+          defaultValue={data.rentalValue}
+          min={0}
+          max={rent_limit}
+          steps={500}
+          unit="$"
+          amount={data.rentalValue}
+          label="Tenant 1 Rent Value"
+          value={data.rentalValue}
+        />
+<SliderComponent
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            securityDeposit: value.toFixed(0),
+            rentAmount: (data.rentalValue - value).toFixed(0),
+          })
+        }
+        defaultValue={data.securityDeposit}
+        min={0}
+        max={data.rentalValue}
+        steps={100}
+        unit="$"
+        amount={data.securityDeposit}
+        label="Security Deposit"
+        value={data.securityDeposit}
+      />
+
+      <SliderComponent
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            rentAmount: value.toFixed(0),
+            securityDeposit: (data.rentalValue - value).toFixed(0),
+          })
+        }
+        defaultValue={data.rentAmount}
+        min={0}
+        max={data.rentalValue}
+        steps={100}
+        unit="$"
+        amount={data.rentAmount}
+        label=" Monthly Rent Amount"
+        value={data.rentAmount}
+      />
+
+
+<SliderComponent
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            abatedRent: value,
+          })
+        }
+        defaultValue={data.abatedRent}
+        min={0}
+        max={12}
+        steps={1}
+        unit="months"
+        amount={data.abatedRent}
+        label="Months of Abated Rent"
+        value={data.abatedRent}
+      />
+
+      </div>
+    );
+  };
+  
+  
+
+  
+
+
+export default SliderSelect;
